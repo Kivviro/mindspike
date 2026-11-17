@@ -11,7 +11,7 @@ struct event {
 
 	char comm[16];
 	char filename[FILENAME_LEN];
-}
+};
 
 struct {
 	__uint(type, BPF_MAP_TYPE_RINGBUF);
@@ -61,7 +61,7 @@ static __always_inline int process_exec(const char *user_filename, __u32 syscall
 
 	event->pid = pid_tgid >> 32;
 	event->uid = (__u32)uid_gid;
-	even->syscall_type = syscall_type;
+	event->syscall_type = syscall_type;
 
 	bpf_get_current_comm(event->comm, sizeof(event->comm));
 
